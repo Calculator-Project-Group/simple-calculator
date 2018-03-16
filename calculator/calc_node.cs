@@ -40,11 +40,11 @@ namespace calculator
             }
         }
     }
-    // 此类用来表示各种二元运算表达式。可嵌套。
+    // 此类用来表示各种二元运算表达式和函数。可嵌套。
     class Binary_node:Calc_node
     {
         // 指明运算符：加、减、乘、除、乘方
-        enum Operator{ ADD, MINUS, MULTI, DIVIDE, EXPO};
+        enum Operator{ ADD, MINUS, MULTI, DIVIDE,EXPO,LOG};
         // 包含两个节点的引用
         Calc_node node1;
         Calc_node node2;
@@ -54,5 +54,16 @@ namespace calculator
             // 
             throw new NotImplementedException();
         }
+    }
+    // 表示各一元函数。可嵌套。
+    class Unary_node:Calc_node
+    {
+        enum FuncID { Sin,Cos,Tan};
+        FuncID func;
+        public override void Calculate()
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

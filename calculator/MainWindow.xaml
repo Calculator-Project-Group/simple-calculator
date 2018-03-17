@@ -5,9 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:calculator"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <TextBox Name="raw_input" HorizontalAlignment="Left" Height="110" Margin="313,271,0,0" TextWrapping="Wrap" Text="Input" VerticalAlignment="Top" Width="418"/>
+        Title="MainWindow" Height="450" Width="750">
+    <Grid >
+        <Border BorderBrush="Black" BorderThickness="1" Height="158" Margin="10,10,10,0" VerticalAlignment="Top">
+            <Canvas HorizontalAlignment="Left"   VerticalAlignment="Top"/>
+        </Border>
+        <TextBox Name="raw_input" HorizontalAlignment="Left" Height="88" Margin="285,271,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="449" FontSize="18" Text="a^3"/>
         <Grid HorizontalAlignment="Left" Height="236" Margin="10,173,0,0" VerticalAlignment="Top" Width="270">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
@@ -44,11 +47,9 @@
         </Grid>
 
 
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="313,386,0,0" TextWrapping="Wrap" Text="Output" VerticalAlignment="Top" Width="418"/>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="158" Margin="10,10,0,0" VerticalAlignment="Top" Width="740">
-            <Canvas HorizontalAlignment="Left"   VerticalAlignment="Top" Width="740"/>
-        </Border>
-        <Grid HorizontalAlignment="Left" Height="93" Margin="313,173,0,0" VerticalAlignment="Top" Width="437">
+        <TextBox HorizontalAlignment="Left" Height="45" Margin="285,364,0,0" TextWrapping="Wrap" Text="输出结果" VerticalAlignment="Top" Width="449" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+
+        <Grid HorizontalAlignment="Left" Height="93" Margin="285,173,0,0" VerticalAlignment="Top" Width="449">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="1*" />

@@ -48,7 +48,7 @@ public partial class CalcParser : Parser {
 
 	private static readonly string[] _LiteralNames = {
 		null, "'PI'", "'pi'", "'\u03C0'", "'E'", "'e'", "'+'", "'-'", "'*'", "'/'", 
-		"'^'", "'('", "')'", "','"
+		"'^'"
 	};
 	private static readonly string[] _SymbolicNames = {
 		null, null, null, null, null, null, "Plus", "Minus", "Multiply", "Divide", 

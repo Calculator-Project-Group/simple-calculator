@@ -8,7 +8,6 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <TextBox Name="raw_input" HorizontalAlignment="Left" Height="93" Margin="373,285,0,0" TextWrapping="Wrap" Text="Input" VerticalAlignment="Top" Width="315"/>
-        <Button Content="Calculate" HorizontalAlignment="Left" Margin="693,285,0,0" VerticalAlignment="Top" Width="75"/>
         <Grid HorizontalAlignment="Left" Height="166" Margin="10,173,0,0" VerticalAlignment="Top" Width="176">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />

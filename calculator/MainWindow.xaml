@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <TextBox Name="raw_input" HorizontalAlignment="Left" Height="93" Margin="373,285,0,0" TextWrapping="Wrap" Text="Input" VerticalAlignment="Top" Width="315"/>
-        <Grid HorizontalAlignment="Left" Height="166" Margin="10,173,0,0" VerticalAlignment="Top" Width="176">
+        <TextBox Name="raw_input" HorizontalAlignment="Left" Height="93" Margin="313,271,0,0" TextWrapping="Wrap" Text="Input" VerticalAlignment="Top" Width="418"/>
+        <Grid HorizontalAlignment="Left" Height="236" Margin="10,173,0,0" VerticalAlignment="Top" Width="270">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="1*" />
@@ -25,7 +25,7 @@
             <Button Grid.Column="0" Grid.Row="0" Content="("  />
             <Button Grid.Column="1" Grid.Row="0" Content=")"  />
             <Button Grid.Column="2" Grid.Row="0" Content="←">
-               
+
             </Button>
             <Button Grid.Column="2" Grid.Row="1" Content="9"  />
             <Button Grid.Column="1" Grid.Row="1" Content="8"  />
@@ -44,10 +44,30 @@
         </Grid>
 
 
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="373,387,0,0" TextWrapping="Wrap" Text="Output" VerticalAlignment="Top" Width="315"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="313,386,0,0" TextWrapping="Wrap" Text="Output" VerticalAlignment="Top" Width="418"/>
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="158" Margin="10,10,0,0" VerticalAlignment="Top" Width="740">
             <Canvas HorizontalAlignment="Left"   VerticalAlignment="Top" Width="740"/>
         </Border>
+        <Grid HorizontalAlignment="Left" Height="93" Margin="298,173,0,0" VerticalAlignment="Top" Width="433" Grid.Row="2" Grid.Column="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Button Grid.Column="0" Grid.Row="0" Content="sin"  />
+            <Button Grid.Column="1" Grid.Row="0" Content="cos"  />
+            <Button Grid.Column="2" Grid.Row="0" Content="tan"  />
+            <Button Grid.Column="3" Grid.Row="0" Content="log"  />
+            <Button Grid.Column="0" Grid.Row="1" Content="("  />
+            <Button Grid.Column="1" Grid.Row="2" Content=")"  />
+            <Button Grid.Column="2" Grid.Row="3" Content="("  />
+            <Button Grid.Column="3" Grid.Row="4" Content=")"  />
+        </Grid>
 
     </Grid>
 </Window>

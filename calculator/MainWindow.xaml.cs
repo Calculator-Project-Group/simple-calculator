@@ -24,5 +24,32 @@ namespace calculator
         {
             InitializeComponent();
         }
+
+        private void Input_Button_Click(object sender, RoutedEventArgs e)
+        {
+            int index;
+            switch ((sender as Button).GetValue(FrameworkElement.NameProperty) as string)
+            {
+                case "input_0":
+                case "input_1":
+                case "input_2":
+                case "input_3":
+                case "input_4":
+                case "input_5":
+                case "input_6":
+                case "input_7":
+                case "input_8":
+                case "input_9":
+                    string prefix = raw_input.Text.Substring(0, index = raw_input.SelectionStart);
+                    string suffix = raw_input.Text.Substring(raw_input.SelectionStart);
+                    raw_input.Text = prefix + (sender as Button).Content + suffix;
+                    raw_input.SelectionStart = index+ (sender as Button).Content.ToString().Length;
+                    break;
+                default:
+                    break;
+
+            }
+            raw_input.Focus();
+        }
     }
 }

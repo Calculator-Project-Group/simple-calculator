@@ -15,7 +15,7 @@ constPI: 'PI'|'pi'|'π';
 constE: 'E'|'e';
 
 
-Int: [1-9][0-9]*;
+Int: [0-9]|[1-9][0-9]*;
 Float: ([1-9][0-9]*|[0-9])'.'[0-9]+;
 WhiteSpace: [ \t\r\n]+ -> skip;
 

@@ -1,4 +1,4 @@
-// Generated from Calc.g4 by ANTLR 4.7
+// Generated from /media/songchaow/DATA/Codes/simple-calculator/calculator/calculator/calculator-parser/Calc.g4 by ANTLR 4.7.1
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class CalcParser extends Parser {
-	static { RuntimeMetaData.checkVersion("4.7", RuntimeMetaData.VERSION); }
+	static { RuntimeMetaData.checkVersion("4.7.1", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
@@ -89,19 +89,6 @@ public class CalcParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_constPI; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalcListener ) ((CalcListener)listener).enterConstPI(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalcListener ) ((CalcListener)listener).exitConstPI(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalcVisitor ) return ((CalcVisitor<? extends T>)visitor).visitConstPI(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ConstPIContext constPI() throws RecognitionException {
@@ -139,19 +126,6 @@ public class CalcParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_constE; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalcListener ) ((CalcListener)listener).enterConstE(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalcListener ) ((CalcListener)listener).exitConstE(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalcVisitor ) return ((CalcVisitor<? extends T>)visitor).visitConstE(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ConstEContext constE() throws RecognitionException {
@@ -191,19 +165,6 @@ public class CalcParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_node; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalcListener ) ((CalcListener)listener).enterNode(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalcListener ) ((CalcListener)listener).exitNode(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalcVisitor ) return ((CalcVisitor<? extends T>)visitor).visitNode(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final NodeContext node() throws RecognitionException {
@@ -251,19 +212,6 @@ public class CalcParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_log_exp; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalcListener ) ((CalcListener)listener).enterLog_exp(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalcListener ) ((CalcListener)listener).exitLog_exp(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalcVisitor ) return ((CalcVisitor<? extends T>)visitor).visitLog_exp(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Log_expContext log_exp() throws RecognitionException {
@@ -381,19 +329,6 @@ public class CalcParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_trig_exp; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalcListener ) ((CalcListener)listener).enterTrig_exp(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalcListener ) ((CalcListener)listener).exitTrig_exp(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalcVisitor ) return ((CalcVisitor<? extends T>)visitor).visitTrig_exp(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Trig_expContext trig_exp() throws RecognitionException {
@@ -468,19 +403,6 @@ public class CalcParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_exp; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CalcListener ) ((CalcListener)listener).enterExp(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CalcListener ) ((CalcListener)listener).exitExp(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CalcVisitor ) return ((CalcVisitor<? extends T>)visitor).visitExp(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ExpContext exp() throws RecognitionException {

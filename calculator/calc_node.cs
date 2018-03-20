@@ -24,7 +24,7 @@ namespace calculator
     // 此类用来表示括号。可嵌套。
     class Bracket_node:Calc_node
     {
-        Calc_node internal_node = null;
+        public Calc_node internal_node = null;
         public override void Calculate()
         {
             internal_node.Calculate();

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace calculator
 {
-    abstract class Calc_node
+    public abstract class Calc_node
     {
         public bool isint = true; // 该节点是否为整型
         protected bool calculated = false; // 该节点是否已计算

@@ -62,6 +62,8 @@ namespace calculator
         FuncID func;
         public override void Calculate()
         {
+            int a = 5;
+            a++;
             throw new NotImplementedException();
         }
 

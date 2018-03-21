@@ -5,18 +5,6 @@ VisualStudioVersion = 15.0.27428.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "calculator", "calculator\calculator.csproj", "{3FC3B333-E28F-43A2-875D-5F7C544C02E3}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "parser", "parser", "{58274340-7A1D-41F1-BED7-D6AAE04E1556}"
-	ProjectSection(SolutionItems) = preProject
-		calculator\calculator-parser\CalcBaseListener.cs = calculator\calculator-parser\CalcBaseListener.cs
-		calculator\calculator-parser\CalcBaseVisitor.cs = calculator\calculator-parser\CalcBaseVisitor.cs
-		calculator\calculator-parser\CalcLexer.cs = calculator\calculator-parser\CalcLexer.cs
-		calculator\calculator-parser\CalcListener.cs = calculator\calculator-parser\CalcListener.cs
-		calculator\calculator-parser\CalcParser.cs = calculator\calculator-parser\CalcParser.cs
-		calculator\calculator-parser\CalcVisitor.cs = calculator\calculator-parser\CalcVisitor.cs
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D2409F5A-FAFE-446C-B42C-D471DCD533E5}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

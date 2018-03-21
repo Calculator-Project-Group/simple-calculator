@@ -50,6 +50,8 @@ namespace calculator
                 width += (child as FrameworkElement).ActualWidth;
                 height+= (child as FrameworkElement).ActualHeight;
             }
+            board.Height = height;
+            board.Width = width;
 
             return board;
         }

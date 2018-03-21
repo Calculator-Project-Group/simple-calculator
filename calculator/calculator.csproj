@@ -64,7 +64,6 @@
     <Compile Include="parser\CalcParser.cs" />
     <Compile Include="parser\CalcVisitor.cs" />
     <Compile Include="render.cs" />
-    <Compile Include="test\TestRender.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

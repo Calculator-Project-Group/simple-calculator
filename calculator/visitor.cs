@@ -14,12 +14,19 @@ namespace calculator
 
         public override Calc_node VisitConstPI([NotNull] CalcParser.ConstPIContext context)
         {
-            return VisitChildren(context);
+            Value_node node = new Value_node();
+            node.isint = false;
+            node.fresult = Math.PI;
+            return node;
+
         }
 
         public override Calc_node VisitConstE([NotNull] CalcParser.ConstEContext context)
         {
-            return VisitChildren(context);
+            Value_node node = new Value_node();
+            node.isint = false;
+            node.fresult = Math.E;
+            return node;
         }
 
         public override Calc_node VisitNode([NotNull] CalcParser.NodeContext context)
@@ -49,6 +56,7 @@ namespace calculator
                     node.fresult = Convert.ToDouble(text);
                 }
             }
+            return node;
         }
 
         public override Calc_node VisitLog_exp([NotNull] CalcParser.Log_expContext context)
@@ -90,7 +98,7 @@ namespace calculator
             {
                 //node log_exp trig_exp
                 IParseTree subtree = context.GetChild(0);
-                return this.Visit(subtree);
+                return Visit(subtree);
             }
             else if(i == 2)
             {
@@ -100,7 +108,7 @@ namespace calculator
             else
             {
                 // + - * / ^    ( exp )
-                Binary_node node = new Binary_node()
+                Binary_node node = new Binary_node();
 
                 Console.WriteLine(context.getAltNumber());
                 return node;

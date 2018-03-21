@@ -11,6 +11,7 @@ namespace calculator
             FontFamily = new System.Windows.Media.FontFamily("Cambria Math");
             Text = formula;
             FontSize = 18;
+            
         }
     }
     public class MathRenderer
@@ -27,31 +28,31 @@ namespace calculator
             if(exp is Value_node)
             {
                 MathText text = new MathText(exp.result.ToString());
+                text.Measure(new Size(Double.PositiveInfinity, Double.PositiveInfinity));
                 board.Children.Add(text);
+                board.Width = text.DesiredSize.Width;
+                board.Height = text.DesiredSize.Height;
             }
             else if(exp is Bracket_node)
             {
                 // we separate brackets and inner text
                 MathText lparen = new MathText("(");
                 Canvas inner_text = RenderElement((exp as Bracket_node).internal_node);
-                MathText rparen = new MathText("(");
+                MathText rparen = new MathText(")");
                 // arrange positions of these elements
+                lparen.Measure(new Size(Double.PositiveInfinity, Double.PositiveInfinity));
+                inner_text.Measure(new Size(Double.PositiveInfinity, Double.PositiveInfinity));
+                rparen.Measure(new Size(Double.PositiveInfinity, Double.PositiveInfinity));
+                
                 Canvas.SetLeft(lparen, 0);
-                Canvas.SetLeft(inner_text, lparen.ActualWidth);
-                Canvas.SetLeft(rparen, lparen.ActualWidth + inner_text.ActualWidth);
                 board.Children.Add(lparen);
+                Canvas.SetLeft(inner_text, lparen.DesiredSize.Width);
                 board.Children.Add(inner_text);
+                Canvas.SetLeft(rparen, lparen.DesiredSize.Width + inner_text.Width);
                 board.Children.Add(rparen);
+                board.Width = lparen.DesiredSize.Width + rparen.DesiredSize.Width + inner_text.Width;
+                board.Height = inner_text.Height;
             }
-            // calculate height and width of this canvas
-            double width = 0, height = 0;
-            foreach(var child in board.Children)
-            {
-                width += (child as FrameworkElement).ActualWidth;
-                height+= (child as FrameworkElement).ActualHeight;
-            }
-            board.Height = height;
-            board.Width = width;
 
             return board;
         }

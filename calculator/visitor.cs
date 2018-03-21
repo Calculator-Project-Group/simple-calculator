@@ -9,7 +9,7 @@ namespace calculator
     public class CalcVisitor<Result> : CalcBaseVisitor<Result>
     {
 
-        public override Result VisitConstPI([NotNull] CalcParser.ConstPIContext context)
+        /*public override Result VisitConstPI([NotNull] CalcParser.ConstPIContext context)
         {
             return VisitChildren(context);
         }
@@ -36,8 +36,8 @@ namespace calculator
 
         public override Result VisitExp([NotNull] CalcParser.ExpContext context)
         {
-            context.children
+            //context.children;
             return VisitChildren(context);
-        }
+        }*/
     }
 }

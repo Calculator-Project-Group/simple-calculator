@@ -14,7 +14,7 @@ namespace calculator
         public double fresult;
         public abstract void Calculate();
     }
-    class Value_node:Calc_node
+    public class Value_node:Calc_node
     {       
         public override void Calculate()
         {
@@ -22,7 +22,7 @@ namespace calculator
         }
     }
     // 此类用来表示括号。可嵌套。
-    class Bracket_node:Calc_node
+    public class Bracket_node:Calc_node
     {
         public Calc_node internal_node = null;
         public override void Calculate()
@@ -41,7 +41,7 @@ namespace calculator
         }
     }
     // 此类用来表示各种二元运算表达式和函数。可嵌套。
-    class Binary_node:Calc_node
+    public class Binary_node:Calc_node
     {
         // 指明运算符：加、减、乘、除、乘方
         enum Operator{ ADD, MINUS, MULTI, DIVIDE,EXPO,LOG};
@@ -56,7 +56,7 @@ namespace calculator
         }
     }
     // 表示各一元函数。可嵌套。
-    class Unary_node:Calc_node
+    public class Unary_node:Calc_node
     {
         enum FuncID { Sin,Cos,Tan};
         FuncID func;

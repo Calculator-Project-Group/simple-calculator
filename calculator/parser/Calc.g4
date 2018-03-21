@@ -15,12 +15,12 @@ constPI: 'PI'|'pi'|'π';
 constE: 'E'|'e';
 
 
-Int: [0-9]|[1-9][0-9]*;
+Int: '0'|[1-9][0-9]*;
 Float: ([1-9][0-9]*|[0-9])'.'[0-9]+;
 WhiteSpace: [ \t\r\n]+ -> skip;
 
 // rules:
-node: Int | Float;
+node: Int | Float | constPI | constE;
 log_exp: LogID LeftParen (exp|) Comma (exp|) RightParen // empty parameter may be allowed
     | LogID LeftParen (exp|) RightParen // empty parameter may be allowed
 ;

@@ -15,10 +15,17 @@ namespace calculator
 
         }
     }
+
+    public class AlignCanvas: Canvas
+    {
+        public double alignHeight = 0;
+    }
+
     public class MathRenderer
     {
         public const double shrinkRatio = (double)5 / 6;
-        public const double expoRatio = (double)5/6;
+        public const double expoRatio = (double)2/3;
+        public const double logRatio = (double)2 / 3;
         public const double defaultFontSize = 18.0;
         public const double fractionBarHeight = 1.5;
 
@@ -29,51 +36,64 @@ namespace calculator
          * Align elements horizontally and return a canvas.
          * Elements include Canvas and MathText.
         */
-        public Canvas ArrangeHorizontalGroup(params FrameworkElement[] elements)
+        public AlignCanvas ArrangeHorizontalGroup(params FrameworkElement[] elements)
         {
-            Canvas board = new Canvas();
-            double startWidth = 0, maxHeight=0;
+            AlignCanvas board = new AlignCanvas();
+            //  maxAlignDepth: the max depth from the top, where all nodes are to be aligned
+            double startWidth = 0, maxAlignDepth=0;
             // set each element's left margin
             foreach (var element in elements)
             {
-                Canvas.SetLeft(element, startWidth);
+                
+                AlignCanvas.SetLeft(element, startWidth);
                 if(element is MathText)
                 {
                     element.Measure(new Size(Double.PositiveInfinity, Double.PositiveInfinity));
                     startWidth += element.DesiredSize.Width;
-                    if (maxHeight < element.DesiredSize.Height)
-                        maxHeight = element.DesiredSize.Height;
+                    if (maxAlignDepth < element.DesiredSize.Height)
+                        maxAlignDepth = element.DesiredSize.Height;
                 }
                 else
                 {
                     // it's a canvas.
                     startWidth += element.Width;
-                    if (maxHeight < element.Height)
-                        maxHeight = element.Height;
+                    if (maxAlignDepth < (element as AlignCanvas).alignHeight)
+                        maxAlignDepth = (element as AlignCanvas).alignHeight;
                 }
             }
-            
+
             // set each element's top margin
+            double maxDepth = 0;
             foreach(var element in elements)
             {
                 if(element is MathText)
-                    Canvas.SetTop(element, (maxHeight - element.DesiredSize.Height) / 2);
+                {
+                    AlignCanvas.SetTop(element, maxAlignDepth - element.DesiredSize.Height);
+                    if (maxAlignDepth > maxDepth) maxDepth = maxAlignDepth;
+                }
                 else
-                    Canvas.SetTop(element, (maxHeight - element.Height) / 2);
+                {
+                    AlignCanvas.SetTop(element, maxAlignDepth - (element as AlignCanvas).alignHeight);
+                    if (element.Height + maxAlignDepth - (element as AlignCanvas).alignHeight > maxDepth)
+                        maxDepth = element.Height + maxAlignDepth - (element as AlignCanvas).alignHeight;
+                }
                 board.Children.Add(element);
             }
             board.Width = startWidth;
-            board.Height = maxHeight;
+            board.Height = maxDepth;
+            board.alignHeight = maxAlignDepth;
             return board;
         }
-        public Canvas ArrangeVerticalGroup(params FrameworkElement[] elements)
+        public AlignCanvas ArrangeVerticalGroup(params FrameworkElement[] elements)
         {
-            Canvas board = new Canvas();
+            AlignCanvas board = new AlignCanvas();
             double startDepth = 0, maxWidth = 0;
             // set each element's left margin
             foreach (var element in elements)
             {
-                Canvas.SetTop(element, startDepth);
+                AlignCanvas.SetTop(element, startDepth);
+                if (element is Rectangle) // fraction bar
+                    board.alignHeight = startDepth;
                 if (element is MathText)
                 {
                     element.Measure(new Size(Double.PositiveInfinity, Double.PositiveInfinity));
@@ -94,24 +114,31 @@ namespace calculator
             foreach (var element in elements)
             {
                 if (element is MathText)
-                    Canvas.SetLeft(element, (maxWidth - element.DesiredSize.Width) / 2);
+                    AlignCanvas.SetLeft(element, (maxWidth - element.DesiredSize.Width) / 2);
                 else
-                    Canvas.SetLeft(element, (maxWidth - element.Width) / 2);
+                    AlignCanvas.SetLeft(element, (maxWidth - element.Width) / 2);
                 board.Children.Add(element);
             }
             board.Height = startDepth;
             board.Width = maxWidth;
+            if (board.alignHeight == 0)
+                board.alignHeight = startDepth;
             return board;
         }
 
-        public Canvas RenderElement(Calc_node exp, double fontsize=defaultFontSize)
+        public AlignCanvas RenderElement(Calc_node exp, double fontsize=defaultFontSize)
         {
-            Canvas board = null;
+            AlignCanvas board = null;
 
             if (exp is Value_node)
             {
-                MathText text = new MathText(exp.result.ToString(),fontsize);
+                MathText text = null;
+                if (exp.isint)
+                    text = new MathText(exp.result.ToString(), fontsize);
+                else
+                    text = new MathText(exp.fresult.ToString(), fontsize);
                 board = ArrangeHorizontalGroup(text);
+                // board.alignHeight = text.DesiredSize.Height;
             }
             else if (exp is Bracket_node)
             {
@@ -124,7 +151,7 @@ namespace calculator
             }
             else if (exp is Binary_node)
             {
-                Canvas operand1 = null, operand2 = null;
+                AlignCanvas operand1 = null, operand2 = null;
                 switch ((exp as Binary_node).op)
                 {
                     // horizontal expressions
@@ -153,7 +180,7 @@ namespace calculator
                     case Binary_node.Operator.EXPO:
                         operand1 = RenderElement((exp as Binary_node).node1, fontsize);
                         operand2 = RenderElement((exp as Binary_node).node2, fontsize * expoRatio);
-                        board = new Canvas();
+                        board = new AlignCanvas();
                         Canvas.SetTop(operand1, operand2.Height/2);
                         Canvas.SetLeft(operand1, 0);
                         board.Children.Add(operand1);
@@ -162,19 +189,20 @@ namespace calculator
                         board.Children.Add(operand2);
                         board.Height = operand1.Height + operand2.Height/2;
                         board.Width = operand1.Width + operand2.Width;
+                        board.alignHeight = operand1.alignHeight+operand2.Height/2; // this step is important
                         break;
                     case Binary_node.Operator.LOG:
                         MathText logID = new MathText("log", fontsize);
-                        operand1 = RenderElement((exp as Binary_node).node1, fontsize*expoRatio);
+                        operand1 = RenderElement((exp as Binary_node).node1, fontsize*logRatio);
                         operand2 = RenderElement((exp as Binary_node).node2, fontsize);
                         // first, we apply ArrangeHorizontal
                         board = ArrangeHorizontalGroup(logID, operand1, operand2);
                         // then, adjust operand1
                         board.Children.Remove(operand1);
-                        Canvas.SetTop(operand1, board.Children[0].DesiredSize.Height / 2);
+                        Canvas.SetTop(operand1, board.Children[0].DesiredSize.Height*3/2-operand1.alignHeight);
                         board.Children.Add(operand1);
                         // update height of canvas `board`
-                        board.Height = Math.Max(Math.Max(logID.Height, operand1.Height), operand2.Height);
+                        board.Height = Math.Max(board.Children[0].DesiredSize.Height * 3 / 2 - operand1.alignHeight+operand1.Height,board.Height);
                         break;
 
 

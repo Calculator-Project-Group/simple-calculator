@@ -20,6 +20,27 @@ namespace UnitTestProject
             isint = true,
             result = 2018L
         };
+        Value_node value3 = new Value_node
+        {
+            isint = true,
+            result = 774L
+        };
+        Value_node value4 = new Value_node
+        {
+            isint = true,
+            result = 123L
+        };
+
+        private void ShowWindow(Calc_node node)
+        {
+            MathRenderer renderer = new MathRenderer();
+            Window window = new Window();
+            window.Closed += (s, e) => window.Dispatcher.InvokeShutdown();
+            Canvas block = renderer.RenderElement(node);
+            window.Content = block;
+            window.Show();
+            System.Windows.Threading.Dispatcher.Run();
+        }
 
         [TestMethod]
         public void TestRenderAdd()
@@ -36,27 +57,7 @@ namespace UnitTestProject
                 op = Binary_node.Operator.ADD
             };
 
-            MathRenderer renderer = new MathRenderer();
-            Window window = null;
-            Thread t = new Thread(() =>
-            {
-                window = new Window();
-
-                // Initiates the dispatcher thread shutdown when the window closes
-                window.Closed += (s, e) => window.Dispatcher.InvokeShutdown();
-
-                Canvas block = renderer.RenderElement(bin_node);
-                window.Content = block;
-                window.Show();
-
-                // Makes the thread support message pumping
-                System.Windows.Threading.Dispatcher.Run();
-            });
-
-            
-            t.SetApartmentState(ApartmentState.STA);
-            t.Start();
-            t.Join();
+            ShowWindow(bin_node);
 
         }
         [TestMethod]
@@ -68,13 +69,7 @@ namespace UnitTestProject
                 node2 = value2,
                 op = Binary_node.Operator.DIVIDE
             };
-            MathRenderer renderer = new MathRenderer();
-            Window window = new Window();
-            window.Closed += (s, e) => window.Dispatcher.InvokeShutdown();
-            Canvas block = renderer.RenderElement(bin_node);
-            window.Content = block;
-            window.Show();
-            System.Windows.Threading.Dispatcher.Run();
+            ShowWindow(bin_node);
         }
 
         [TestMethod]
@@ -86,13 +81,7 @@ namespace UnitTestProject
                 node2 = value2,
                 op = Binary_node.Operator.EXPO
             };
-            MathRenderer renderer = new MathRenderer();
-            Window window = new Window();
-            window.Closed += (s, e) => window.Dispatcher.InvokeShutdown();
-            Canvas block = renderer.RenderElement(exp_node);
-            window.Content = block;
-            window.Show();
-            System.Windows.Threading.Dispatcher.Run();
+            ShowWindow(exp_node);
         }
 
         [TestMethod]
@@ -104,19 +93,67 @@ namespace UnitTestProject
                 node2 = value2,
                 op = Binary_node.Operator.LOG
             };
-            MathRenderer renderer = new MathRenderer();
-            Window window = new Window();
-            window.Closed += (s, e) => window.Dispatcher.InvokeShutdown();
-            Canvas block = renderer.RenderElement(exp_node);
-            window.Content = block;
-            window.Show();
-            System.Windows.Threading.Dispatcher.Run();
+            ShowWindow(exp_node);
         }
 
         [TestMethod]
-        public void TestRenderMixExp()
+        public void TestRenderMixExp1()
         {
+            Binary_node exp_node = new Binary_node
+            {
+                node1 = value1,
+                node2 = value2,
+                op = Binary_node.Operator.EXPO
+            };
+            Binary_node pow_node = new Binary_node
+            {
+                node1 = value1,
+                node2 = value2,
+                op = Binary_node.Operator.EXPO
+            };
+            Binary_node log_node = new Binary_node
+            {
+                node1 = pow_node,
+                node2 = exp_node,
+                op = Binary_node.Operator.LOG
+            };
+            ShowWindow(log_node);
+        }
 
+        [TestMethod]
+        public void TestRenderMixExp2()
+        {
+            Binary_node div_node1 = new Binary_node
+            {
+                node1 = value1,
+                node2 = value2,
+                op = Binary_node.Operator.DIVIDE
+            };
+            Binary_node div_node2 = new Binary_node
+            {
+                node1 = value3,
+                node2 = value4,
+                op = Binary_node.Operator.DIVIDE
+            };
+            Binary_node div_node = new Binary_node
+            {
+                node1 = div_node1,
+                node2 = div_node2,
+                op = Binary_node.Operator.DIVIDE
+            };
+            Binary_node pow_node0 = new Binary_node
+            {
+                node1 = div_node,
+                node2 = value3,
+                op = Binary_node.Operator.EXPO
+            };
+            Binary_node add_node = new Binary_node
+            {
+                node1 = pow_node0,
+                node2 = value4,
+                op = Binary_node.Operator.ADD
+            };
+            ShowWindow(add_node);
         }
     }
 }

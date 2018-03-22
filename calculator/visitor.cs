@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Antlr4.Runtime;
 using Antlr4.Runtime.Misc;
 using Antlr4.Runtime.Tree;
 
@@ -149,4 +150,21 @@ namespace calculator
             }
         }
     }
+
+    public class CalcTreeGenerator
+    {
+        public Calc_node Generator(string text)
+        {
+            var stream = new AntlrInputStream(text);
+            var lexer = new CalcLexer(stream);
+            var tokens = new CommonTokenStream(lexer);
+            var parser = new CalcParser(tokens);
+            var tree = parser.exp();
+
+            var visitor = new CalcVisitor();
+            var result = visitor.Visit(tree);
+            return result;
+        }
+    }
+
 }

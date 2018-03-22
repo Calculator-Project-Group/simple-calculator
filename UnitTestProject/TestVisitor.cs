@@ -11,7 +11,8 @@ namespace UnitTestProject
         [TestMethod]
         public void TestVisitExp()
         {
-            string input = @"1 - 2";
+            Console.WriteLine("TestVisitExp start");
+            string input = @"10 - 2 + 3*4.5";
 
             var stream = new AntlrInputStream(input);
             var lexer = new CalcLexer(stream);
@@ -23,9 +24,7 @@ namespace UnitTestProject
             var result = visitor.Visit(tree);
 
 
-            //Console.WriteLine(tree.ToStringTree(parser));
-            //Console.WriteLine(result);
-            Console.ReadKey();
+            Console.WriteLine("TestVisitExp end");
         }
     }
 }

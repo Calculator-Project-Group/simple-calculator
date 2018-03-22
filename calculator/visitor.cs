@@ -64,6 +64,7 @@ namespace calculator
 
         public override Calc_node VisitLog_exp([NotNull] CalcParser.Log_expContext context)
         {
+            // 生成 log 节点
             Binary_node node = new Binary_node
             {
                 op = Binary_node.Operator.LOG,
@@ -76,22 +77,19 @@ namespace calculator
         public override Calc_node VisitTrig_exp([NotNull] CalcParser.Trig_expContext context)
         {
             Unary_node node = new Unary_node();
-            switch(context.TrigID().GetText())
+            switch(context.TrigID().GetText().ToLower())
             {
                 case "sin":
-                case "Sin":
                     node.func = Unary_node.FuncID.Sin;
                     break;
-                case "cos":
-                case "Cos":
+                case "cos":               
                     node.func = Unary_node.FuncID.Cos;
                     break;
                 case "tan":
-                case "Tan":
                     node.func = Unary_node.FuncID.Tan;
                     break;
             }
-            node.node1 = this.Visit(context.exp());
+            node.node1 = Visit(context.exp());
             return node;
         }
 
@@ -102,8 +100,8 @@ namespace calculator
             if (i == 1)
             {
                 //node log_exp trig_exp
-                IParseTree subtree = context.GetChild(0);
-                return this.Visit(subtree);
+                var subtree = context.GetChild(0);
+                return Visit(subtree);
             }
             else if(i == 2)
             {
@@ -112,11 +110,42 @@ namespace calculator
             }
             else
             {
-                // + - * / ^    ( exp )
-                Binary_node node = new Binary_node();
-
-                Console.WriteLine(context.getAltNumber());
-                return node;
+                
+                var child = context.GetChild(1);
+                if(child.ChildCount == 0)
+                {
+                    // + - * / ^
+                    Binary_node node = new Binary_node();
+                    switch (child.GetText())
+                    {
+                        case "+":
+                            node.op = Binary_node.Operator.ADD;
+                            break;
+                        case "-":
+                            node.op = Binary_node.Operator.MINUS;
+                            break;
+                        case "*":
+                            node.op = Binary_node.Operator.MULTI;
+                            break;
+                        case "/":
+                            node.op = Binary_node.Operator.DIVIDE;
+                            break;
+                        case "^":
+                            node.op = Binary_node.Operator.EXPO;
+                            break;
+                    }
+                    node.node1 = Visit(context.GetChild(0));
+                    node.node2 = Visit(context.GetChild(2));
+                    return node;
+                }
+                else
+                {
+                    //(exp)
+                    return new Bracket_node
+                    {
+                        internal_node = Visit(context.GetChild(1))
+                    };
+                }                
             }
         }
     }

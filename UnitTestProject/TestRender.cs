@@ -10,24 +10,24 @@ namespace UnitTestProject
     [TestClass]
     public class TestRender
     {
-        
-        [TestMethod]
-        public void TestMethod1()
+        Value_node value1 = new Value_node
         {
-            Value_node value = new Value_node
-            {
-                isint = true,
-                result = 50233L
-            };
-            Value_node value2 = new Value_node
-            {
-                isint = true,
-                result = 2018L
-            };
-            value.Calculate();
+            isint = true,
+            result = 50233L
+        };
+        Value_node value2 = new Value_node
+        {
+            isint = true,
+            result = 2018L
+        };
+
+        [TestMethod]
+        public void TestRenderAdd()
+        {
+            
             Bracket_node bnode = new Bracket_node
             {
-                internal_node = value
+                internal_node = value1
             };
             Binary_node bin_node = new Binary_node
             {
@@ -60,18 +60,8 @@ namespace UnitTestProject
 
         }
         [TestMethod]
-        public void TestFraction()
+        public void TestRenderFraction()
         {
-            Value_node value1 = new Value_node
-            {
-                isint = true,
-                result = 50233L
-            };
-            Value_node value2 = new Value_node
-            {
-                isint = true,
-                result = 2018L
-            };
             Binary_node bin_node = new Binary_node
             {
                 node1 = value1,
@@ -85,6 +75,30 @@ namespace UnitTestProject
             window.Content = block;
             window.Show();
             System.Windows.Threading.Dispatcher.Run();
+        }
+
+        [TestMethod]
+        public void TestRenderExpo()
+        {
+            Binary_node exp_node = new Binary_node
+            {
+                node1 = value1,
+                node2 = value2,
+                op = Binary_node.Operator.EXPO
+            };
+            MathRenderer renderer = new MathRenderer();
+            Window window = new Window();
+            window.Closed += (s, e) => window.Dispatcher.InvokeShutdown();
+            Canvas block = renderer.RenderElement(exp_node);
+            window.Content = block;
+            window.Show();
+            System.Windows.Threading.Dispatcher.Run();
+        }
+
+        [TestMethod]
+        public void TestRenderMixExp()
+        {
+
         }
     }
 }

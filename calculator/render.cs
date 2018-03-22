@@ -18,6 +18,7 @@ namespace calculator
     public class MathRenderer
     {
         public const double shrinkRatio = (double)5 / 6;
+        public const double expRatio = (double)5/6;
         public const double defaultFontSize = 18.0;
         public const double fractionBarHeight = 1.5;
 
@@ -109,15 +110,15 @@ namespace calculator
 
             if (exp is Value_node)
             {
-                MathText text = new MathText(exp.result.ToString());
+                MathText text = new MathText(exp.result.ToString(),fontsize);
                 board = ArrangeHorizontalGroup(text);
             }
             else if (exp is Bracket_node)
             {
                 // we separate brackets and inner text
-                MathText lparen = new MathText("(");
+                MathText lparen = new MathText("(",fontsize);
                 Canvas inner_text = RenderElement((exp as Bracket_node).internal_node,fontsize);
-                MathText rparen = new MathText(")");
+                MathText rparen = new MathText(")",fontsize);
                 // arrange positions of these elements
                 board = ArrangeHorizontalGroup(lparen, inner_text, rparen);
             }
@@ -131,7 +132,7 @@ namespace calculator
                     case Binary_node.Operator.MINUS:
                     case Binary_node.Operator.MULTI:
                         operand1 = RenderElement((exp as Binary_node).node1, fontsize);
-                        MathText add = new MathText("+");
+                        MathText add = new MathText("+",fontsize);
                         operand2 = RenderElement((exp as Binary_node).node2, fontsize);
                         board = ArrangeHorizontalGroup(operand1, add, operand2);
                         break;
@@ -148,7 +149,23 @@ namespace calculator
                         fractline.HorizontalAlignment = HorizontalAlignment.Center;
                         board = ArrangeVerticalGroup(operand1, fractline, operand2);
                         break;
+                    // miscellaneous
+                    case Binary_node.Operator.EXPO:
+                        operand1 = RenderElement((exp as Binary_node).node1, fontsize);
+                        operand2 = RenderElement((exp as Binary_node).node2, fontsize * expRatio);
+                        board = new Canvas();
+                        Canvas.SetTop(operand1, operand2.Height/2);
+                        Canvas.SetLeft(operand1, 0);
+                        board.Children.Add(operand1);
+                        Canvas.SetTop(operand2, 0);
+                        Canvas.SetLeft(operand2, operand1.Width);
+                        board.Children.Add(operand2);
+                        board.Height = operand1.Height + operand2.Height/2;
+                        board.Width = operand1.Width + operand2.Width;
+                        break;
                     
+
+
                     default:
                         break;
                 }

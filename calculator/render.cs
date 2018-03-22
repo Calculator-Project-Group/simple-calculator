@@ -28,6 +28,7 @@ namespace calculator
         public const double logRatio = (double)2 / 3;
         public const double defaultFontSize = 18.0;
         public const double fractionBarHeight = 1.5;
+        public readonly string[] funcID = { "Sin", "Cos", "Tan" };
 
         public MathRenderer()
         {
@@ -204,11 +205,16 @@ namespace calculator
                         // update height of canvas `board`
                         board.Height = Math.Max(board.Children[0].DesiredSize.Height * 3 / 2 - operand1.alignHeight+operand1.Height,board.Height);
                         break;
-
-
                     default:
                         break;
                 }
+            }
+            else if(exp is Unary_node)
+            {
+                MathText funcText = new MathText(funcID[(int)(exp as Unary_node).func]+"(",fontsize);
+                AlignCanvas inner_node = RenderElement((exp as Unary_node).node1);
+                MathText rparen = new MathText(")", fontsize);
+                board = ArrangeHorizontalGroup(funcText, inner_node,rparen);
             }
 
             return board;

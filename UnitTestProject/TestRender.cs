@@ -95,6 +95,51 @@ namespace UnitTestProject
             };
             ShowWindow(exp_node);
         }
+        [TestMethod]
+        public void TestTrigFunc()
+        {
+            Binary_node div_node1 = new Binary_node
+            {
+                node1 = value1,
+                node2 = value2,
+                op = Binary_node.Operator.DIVIDE
+            };
+            Binary_node exp_node = new Binary_node
+            {
+                node1 = value1,
+                node2 = value2,
+                op = Binary_node.Operator.LOG
+            };
+            Unary_node sin_node = new Unary_node
+            {
+                node1 = exp_node,
+                func = Unary_node.FuncID.Sin
+            };
+            Unary_node cos_node = new Unary_node
+            {
+                node1 = div_node1,
+                func = Unary_node.FuncID.Cos
+            };
+            Unary_node tan_node = new Unary_node
+            {
+                node1 = value3,
+                func = Unary_node.FuncID.Tan
+            };
+            Binary_node add1 = new Binary_node
+            {
+                node1 = sin_node,
+                node2 = cos_node,
+                op = Binary_node.Operator.ADD
+            };
+            Binary_node add2 = new Binary_node
+            {
+                node1 = add1,
+                node2 = tan_node,
+                op = Binary_node.Operator.ADD
+            };
+            ShowWindow(add2);
+
+        }
 
         [TestMethod]
         public void TestRenderMixExp1()

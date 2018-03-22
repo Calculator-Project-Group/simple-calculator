@@ -18,7 +18,7 @@ namespace calculator
     public class MathRenderer
     {
         public const double shrinkRatio = (double)5 / 6;
-        public const double expRatio = (double)5/6;
+        public const double expoRatio = (double)5/6;
         public const double defaultFontSize = 18.0;
         public const double fractionBarHeight = 1.5;
 
@@ -152,7 +152,7 @@ namespace calculator
                     // miscellaneous
                     case Binary_node.Operator.EXPO:
                         operand1 = RenderElement((exp as Binary_node).node1, fontsize);
-                        operand2 = RenderElement((exp as Binary_node).node2, fontsize * expRatio);
+                        operand2 = RenderElement((exp as Binary_node).node2, fontsize * expoRatio);
                         board = new Canvas();
                         Canvas.SetTop(operand1, operand2.Height/2);
                         Canvas.SetLeft(operand1, 0);
@@ -163,7 +163,19 @@ namespace calculator
                         board.Height = operand1.Height + operand2.Height/2;
                         board.Width = operand1.Width + operand2.Width;
                         break;
-                    
+                    case Binary_node.Operator.LOG:
+                        MathText logID = new MathText("log", fontsize);
+                        operand1 = RenderElement((exp as Binary_node).node1, fontsize*expoRatio);
+                        operand2 = RenderElement((exp as Binary_node).node2, fontsize);
+                        // first, we apply ArrangeHorizontal
+                        board = ArrangeHorizontalGroup(logID, operand1, operand2);
+                        // then, adjust operand1
+                        board.Children.Remove(operand1);
+                        Canvas.SetTop(operand1, board.Children[0].DesiredSize.Height / 2);
+                        board.Children.Add(operand1);
+                        // update height of canvas `board`
+                        board.Height = Math.Max(Math.Max(logID.Height, operand1.Height), operand2.Height);
+                        break;
 
 
                     default:

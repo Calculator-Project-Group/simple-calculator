@@ -13,7 +13,7 @@ namespace UnitTestProject
         Value_node value1 = new Value_node
         {
             isint = true,
-            result = 50233L
+            result = 2333L
         };
         Value_node value2 = new Value_node
         {
@@ -85,6 +85,24 @@ namespace UnitTestProject
                 node1 = value1,
                 node2 = value2,
                 op = Binary_node.Operator.EXPO
+            };
+            MathRenderer renderer = new MathRenderer();
+            Window window = new Window();
+            window.Closed += (s, e) => window.Dispatcher.InvokeShutdown();
+            Canvas block = renderer.RenderElement(exp_node);
+            window.Content = block;
+            window.Show();
+            System.Windows.Threading.Dispatcher.Run();
+        }
+
+        [TestMethod]
+        public void TestLogExp()
+        {
+            Binary_node exp_node = new Binary_node
+            {
+                node1 = value1,
+                node2 = value2,
+                op = Binary_node.Operator.LOG
             };
             MathRenderer renderer = new MathRenderer();
             Window window = new Window();

@@ -51,8 +51,8 @@ namespace calculator
                 {
                     element.Measure(new Size(Double.PositiveInfinity, Double.PositiveInfinity));
                     startWidth += element.DesiredSize.Width;
-                    if (maxAlignDepth < element.DesiredSize.Height)
-                        maxAlignDepth = element.DesiredSize.Height;
+                    if (maxAlignDepth < element.DesiredSize.Height/2)
+                        maxAlignDepth = element.DesiredSize.Height/2;
                 }
                 else
                 {
@@ -69,8 +69,9 @@ namespace calculator
             {
                 if(element is MathText)
                 {
-                    AlignCanvas.SetTop(element, maxAlignDepth - element.DesiredSize.Height);
-                    if (maxAlignDepth > maxDepth) maxDepth = maxAlignDepth;
+                    AlignCanvas.SetTop(element, maxAlignDepth - element.DesiredSize.Height/2);
+                    if (element.DesiredSize.Height + maxAlignDepth - element.DesiredSize.Height / 2 > maxDepth)
+                        maxDepth = element.DesiredSize.Height + maxAlignDepth - element.DesiredSize.Height / 2;
                 }
                 else
                 {
@@ -200,10 +201,10 @@ namespace calculator
                         board = ArrangeHorizontalGroup(logID, operand1, operand2);
                         // then, adjust operand1
                         board.Children.Remove(operand1);
-                        Canvas.SetTop(operand1, board.Children[0].DesiredSize.Height*3/2-operand1.alignHeight);
+                        Canvas.SetTop(operand1, board.Children[0].DesiredSize.Height);
                         board.Children.Add(operand1);
                         // update height of canvas `board`
-                        board.Height = Math.Max(board.Children[0].DesiredSize.Height * 3 / 2 - operand1.alignHeight+operand1.Height,board.Height);
+                        board.Height = Math.Max(board.Children[0].DesiredSize.Height+operand1.Height,board.Height);
                         break;
                     default:
                         break;

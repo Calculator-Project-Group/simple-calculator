@@ -41,7 +41,7 @@
             <Button Name="input_mul" Grid.Column="3" Grid.Row="1"  Content="×" FontSize="20"  Click="Input_Button_Click"/>
             <Button Name="input_minus" Grid.Column="3" Grid.Row="2"  Content="-" FontSize="20"  Click="Input_Button_Click"/>
             <Button Name="input_add" Grid.Column="3" Grid.Row="3"  Content="+" FontSize="20"  Click="Input_Button_Click"/>
-            <Button Name="calculate"  Grid.Column="3" Grid.Row="4" Content="=" Background="#FFA4E6F6" FontSize="20"  />
+            <Button Name="calculate"  Grid.Column="3" Grid.Row="4" Content="=" Background="#FFA4E6F6" FontSize="20" Click="Calculate_Button_Click"  />
             <Button Name="input_0" Grid.Row="4" Grid.Column="1"  Content="0" FontSize="20"   Click="Input_Button_Click"/>
             <Button Name="input_dot" Grid.Column="2" Grid.Row="4"  Content="." FontSize="20"  Click="Input_Button_Click"/>
         </Grid>
@@ -68,11 +68,11 @@
             <Button Name="input_log" Grid.Column="3" Grid.Row="0"  Content="log" FontSize="18" Click="Input_Button_Click" />
             <Button Name="input_pow" Grid.Column="4" Grid.Row="0"  Content="^" FontSize="18" Click="Input_Button_Click" />
             <Button Name="input_comma" Grid.Column="5" Grid.Row="0"  Content="," FontSize="18" Click="Input_Button_Click" />
-            <Button Name="control_left" Grid.Column="0" Grid.Row="1"  Content="←" FontSize="18" Click="Input_Button_Click"  />
-            <Button Name="control_right" Grid.Column="1" Grid.Row="1"  Content="→" FontSize="18" Click="Input_Button_Click"  />
+            <Button Name="control_left" Grid.Column="0" Grid.Row="1"  Content="←" FontSize="18" Click="Control_Button_Click"  />
+            <Button Name="control_right" Grid.Column="1" Grid.Row="1"  Content="→" FontSize="18" Click="Control_Button_Click"  />
             <Button Name="input_e" Grid.Column="2" Grid.Row="1"  Content="e" FontSize="18" Click="Input_Button_Click" />
             <Button Name="input_π" Grid.Column="3" Grid.Row="1"  Content="π" FontSize="18" Click="Input_Button_Click" />
-            <Button Name="control_back" Grid.Column="4" Grid.Row="1"  Content="Back" FontSize="18" Click="Input_Button_Click" />
+            <Button Name="control_back" Grid.Column="4" Grid.Row="1"  Content="Back" FontSize="18" Click="Control_Button_Click" />
         </Grid>
 
     </Grid>

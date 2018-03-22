@@ -44,7 +44,7 @@ namespace calculator
     public class Binary_node:Calc_node
     {
         // 指明运算符：加、减、乘、除、乘方
-        public enum Operator{ ADD, MINUS, MULTI, DIVIDE,EXPO,LOG};
+        public enum Operator { ADD, MINUS, MULTI, DIVIDE,EXPO,LOG};
         // 包含两个节点的引用
         public Calc_node node1;
         public Calc_node node2;
@@ -60,6 +60,7 @@ namespace calculator
     {
         public enum FuncID { Sin,Cos,Tan};
         public FuncID func;
+        public Calc_node node1;
         public override void Calculate()
         {
             int a = 5;

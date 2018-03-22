@@ -45,9 +45,28 @@ namespace calculator
                     raw_input.Text = prefix + (sender as Button).Content + suffix;
                     raw_input.SelectionStart = index+ (sender as Button).Content.ToString().Length;
                     break;
+                case "control_left":
+                    if (raw_input.SelectionStart > 0)
+                    {
+                        raw_input.SelectionStart -= 1;
+                    }
+                    break;
+                case "control_right":
+                    raw_input.SelectionStart += 1;
+                    break;
+                case "control_back":
+                    index = raw_input.SelectionStart - 1;
+                    if (index > 0)
+                    {                        
+                        raw_input.Text = 
+                            raw_input.Text.Substring(0, index) 
+                            + raw_input.Text.Substring(index+1);
+                        raw_input.SelectionStart = index;
+                    }
+                    break;
                 default:
                     break;
-
+                    
             }
             raw_input.Focus();
         }

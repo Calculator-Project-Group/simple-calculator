@@ -8,10 +8,10 @@
         Title="MainWindow" Height="450" Width="750">
     <Grid >
         <Border x:Name="canvas_box" BorderBrush="Black" BorderThickness="1" Height="158" Margin="10,10,10,0" VerticalAlignment="Top">
-            <Viewbox>
+            <Viewbox Name="vbox">
             </Viewbox>
         </Border>
-        <TextBox Name="raw_input" HorizontalAlignment="Left" Height="88" Margin="285,271,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="449" FontSize="18"/>
+        <TextBox Name="raw_input" HorizontalAlignment="Left" Height="88" Margin="285,271,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="449" FontSize="18" TextChanged="Input_TextChanged"/>
         <Grid HorizontalAlignment="Left" Height="236" Margin="10,173,0,0" VerticalAlignment="Top" Width="270">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />

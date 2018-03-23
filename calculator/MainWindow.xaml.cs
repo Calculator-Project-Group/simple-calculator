@@ -20,9 +20,18 @@ namespace calculator
     /// </summary>
     public partial class MainWindow : Window
     {
+        CalcTreeGenerator G = new CalcTreeGenerator();
+        MathRenderer renderer = new MathRenderer();
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Input_TextChanged(object sender, RoutedEventArgs e)
+        {
+            Calc_node node = G.Generate(raw_input.Text);
+            Canvas drawing = renderer.RenderElement(node);
+            vbox.Child=drawing;
         }
 
         private void Input_Button_Click(object sender, RoutedEventArgs e)
@@ -86,7 +95,7 @@ namespace calculator
 
         private void Calculate_Button_Click(object sender, RoutedEventArgs e)
         {
-            CalcTreeGenerator G = new CalcTreeGenerator();
+            
             Calc_node node = G.Generate(raw_input.Text);
             result_box.Text = "1234";
         }

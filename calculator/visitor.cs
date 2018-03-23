@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -153,15 +154,26 @@ namespace calculator
 
     public class CalcTreeGenerator
     {
+        AntlrInputStream stream = new AntlrInputStream();
+        CalcVisitor visitor = new CalcVisitor();
+        public CalcTreeGenerator(string text=null)
+        {
+            if (text != null)
+            {
+                TextReader sr = new StringReader(text);
+                stream.Load(sr, BaseInputCharStream.InitialBufferSize, BaseInputCharStream.ReadBufferSize);
+            }
+        }
+
         public Calc_node Generate(string text)
         {
-            var stream = new AntlrInputStream(text);
+            TextReader sr = new StringReader(text);
+            stream.Load(sr, BaseInputCharStream.InitialBufferSize, BaseInputCharStream.ReadBufferSize);
             var lexer = new CalcLexer(stream);
+            lexer.SetInputStream(stream);
             var tokens = new CommonTokenStream(lexer);
             var parser = new CalcParser(tokens);
             var tree = parser.exp();
-
-            var visitor = new CalcVisitor();
             var result = visitor.Visit(tree);
             return result;
         }

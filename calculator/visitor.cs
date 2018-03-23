@@ -168,9 +168,9 @@ namespace calculator
         public Calc_node Generate(string text)
         {
             TextReader sr = new StringReader(text);
+            stream.Reset();
             stream.Load(sr, BaseInputCharStream.InitialBufferSize, BaseInputCharStream.ReadBufferSize);
             var lexer = new CalcLexer(stream);
-            lexer.SetInputStream(stream);
             var tokens = new CommonTokenStream(lexer);
             var parser = new CalcParser(tokens);
             var tree = parser.exp();

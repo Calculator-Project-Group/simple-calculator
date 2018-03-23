@@ -29,7 +29,17 @@ namespace calculator
 
         private void Input_TextChanged(object sender, RoutedEventArgs e)
         {
-            Calc_node node = G.Generate(raw_input.Text);
+            Calc_node node = null;
+            try
+            {
+                node = G.Generate(raw_input.Text);
+            }
+            catch (Exception)
+            {
+
+                return;
+            }
+            
             Canvas drawing = renderer.RenderElement(node);
             vbox.Child=drawing;
         }

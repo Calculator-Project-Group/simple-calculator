@@ -75,7 +75,7 @@ namespace calculator
                     break;
                 case "control_back":
                     index = raw_input.SelectionStart - 1;
-                    if (index > 0)
+                    if (index >= 0)
                     {
                         raw_input.Text =
                             raw_input.Text.Substring(0, index)

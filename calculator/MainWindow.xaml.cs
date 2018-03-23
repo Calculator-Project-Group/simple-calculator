@@ -82,7 +82,7 @@ namespace calculator
                 case "input_e":
                 case "input_π":
                 case "input_comma":
-                case "input_power":
+                case "input_pow":
                     raw_input.Text = prefix + (sender as Button).Content + suffix;
                     raw_input.SelectionStart = index+ (sender as Button).Content.ToString().Length;
                     break;
@@ -136,6 +136,8 @@ namespace calculator
                     break;
                 case "control_AC":
                     raw_input.Text = "";
+                    result_box.Text = "";
+                    vbox.Child = new Canvas(); // clear canvas
                     break;
                 default:
                     break;

@@ -126,9 +126,8 @@ namespace calculator
                 // LeftParen RightParen 空括号节点
                 return new Bracket_node();
             }
-            else
+            else if(i == 3)
             {
-                
                 var child = context.GetChild(1);
                 if(child.ChildCount == 0)
                 {
@@ -183,6 +182,7 @@ namespace calculator
 
         public Calc_node Generate(string text)
         {
+            text = text.Replace('×', '*').Replace('÷', '/'); // patch
             TextReader sr = new StringReader(text);
             stream.Reset();
             stream.Load(sr, BaseInputCharStream.InitialBufferSize, BaseInputCharStream.ReadBufferSize);

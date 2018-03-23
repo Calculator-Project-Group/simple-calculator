@@ -28,7 +28,8 @@ namespace calculator
         public const double logRatio = (double)2 / 3;
         public const double defaultFontSize = 18.0;
         public const double fractionBarHeight = 1.5;
-        public readonly string[] funcID = { "Sin", "Cos", "Tan" };
+        public readonly string[] funcID = { "sin", "cos", "tan" };
+        public readonly string[] opID = { "+", "-", "×", "oops 代码写错啦", "oops 代码写错啦", "oops 代码写错啦" };
 
         public MathRenderer()
         {
@@ -161,7 +162,7 @@ namespace calculator
                     case Binary_node.Operator.MINUS:
                     case Binary_node.Operator.MULTI:
                         operand1 = RenderElement((exp as Binary_node).node1, fontsize);
-                        MathText add = new MathText("+",fontsize);
+                        MathText add = new MathText(opID[(int)(exp as Binary_node).op],fontsize);
                         operand2 = RenderElement((exp as Binary_node).node2, fontsize);
                         board = ArrangeHorizontalGroup(operand1, add, operand2);
                         break;
@@ -196,15 +197,17 @@ namespace calculator
                     case Binary_node.Operator.LOG:
                         MathText logID = new MathText("log", fontsize);
                         operand1 = RenderElement((exp as Binary_node).node1, fontsize*logRatio);
+                        MathText lparen = new MathText("(", fontsize);
                         operand2 = RenderElement((exp as Binary_node).node2, fontsize);
+                        MathText rparen = new MathText(")", fontsize);
                         // first, we apply ArrangeHorizontal
-                        board = ArrangeHorizontalGroup(logID, operand1, operand2);
+                        board = ArrangeHorizontalGroup(logID, operand1, lparen, operand2, rparen);
                         // then, adjust operand1
                         board.Children.Remove(operand1);
-                        Canvas.SetTop(operand1, board.Children[0].DesiredSize.Height);
+                        Canvas.SetTop(operand1, Canvas.GetTop(board.Children[0])+ board.Children[0].DesiredSize.Height*2/3);
                         board.Children.Add(operand1);
                         // update height of canvas `board`
-                        board.Height = Math.Max(board.Children[0].DesiredSize.Height+operand1.Height,board.Height);
+                        board.Height = Math.Max(Canvas.GetTop(board.Children[0])+board.Children[0].DesiredSize.Height*2/3+operand1.Height,board.Height);
                         break;
                     default:
                         break;
@@ -213,11 +216,22 @@ namespace calculator
             else if(exp is Unary_node)
             {
                 MathText funcText = new MathText(funcID[(int)(exp as Unary_node).func]+"(",fontsize);
-                AlignCanvas inner_node = RenderElement((exp as Unary_node).node1);
+                AlignCanvas inner_node = RenderElement((exp as Unary_node).node1,fontsize);
                 MathText rparen = new MathText(")", fontsize);
                 board = ArrangeHorizontalGroup(funcText, inner_node,rparen);
             }
-
+            else if(exp == null)
+            {
+                Rectangle placeholder = new Rectangle();
+                placeholder.Width = fontsize;
+                placeholder.Height = fontsize;
+                placeholder.Fill = System.Windows.Media.Brushes.LightBlue;
+                board = new AlignCanvas();
+                board.Children.Add(placeholder);
+                board.Height = placeholder.Height;
+                board.Width = placeholder.Width;
+                board.alignHeight = board.Height / 2;
+            }
             return board;
         }
 

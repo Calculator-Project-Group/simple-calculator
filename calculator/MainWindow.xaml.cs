@@ -28,8 +28,22 @@ namespace calculator
         private void Input_Button_Click(object sender, RoutedEventArgs e)
         {
             int index;
+            string prefix = raw_input.Text.Substring(0, index = raw_input.SelectionStart);
+            string suffix = raw_input.Text.Substring(raw_input.SelectionStart);
             switch ((sender as Button).GetValue(FrameworkElement.NameProperty) as string)
             {
+                
+                case "input_lparen":
+                    if((e as MouseButtonEventArgs).ChangedButton==MouseButton.Right)
+                    {
+                        raw_input.Text = prefix + (sender as Button).Content + suffix;
+                    }
+                    else
+                    {
+                        raw_input.Text = prefix + (sender as Button).Content + ")"+suffix;
+                    }
+                    raw_input.SelectionStart = index + (sender as Button).Content.ToString().Length;
+                    break;
                 case "input_0":
                 case "input_1":
                 case "input_2":
@@ -40,10 +54,28 @@ namespace calculator
                 case "input_7":
                 case "input_8":
                 case "input_9":
-                    string prefix = raw_input.Text.Substring(0, index = raw_input.SelectionStart);
-                    string suffix = raw_input.Text.Substring(raw_input.SelectionStart);
+                case "input_div":
+                case "input_add":
+                case "input_minus":
+                case "input_mul":
+                case "input_rparen":
+                case "input_dot":
+                case "input_e":
+                case "input_π":
+                case "input_comma":
+                case "input_power":
                     raw_input.Text = prefix + (sender as Button).Content + suffix;
                     raw_input.SelectionStart = index+ (sender as Button).Content.ToString().Length;
+                    break;
+                case "input_sin":
+                case "input_cos":
+                case "input_tan":
+                    raw_input.Text = prefix + (sender as Button).Content + "()" + suffix;
+                    raw_input.SelectionStart = index + (sender as Button).Content.ToString().Length+1;
+                    break;
+                case "input_log":
+                    raw_input.Text = prefix + (sender as Button).Content + "(,)" + suffix;
+                    raw_input.SelectionStart = index + (sender as Button).Content.ToString().Length + 1;
                     break;
                 default:
                     break;

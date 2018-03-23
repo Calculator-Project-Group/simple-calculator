@@ -164,6 +164,11 @@ namespace calculator
                     };
                 }                
             }
+            else
+            {
+                // will not be executed Unless there is a error
+                throw(new ApplicationException("unexpected ChildCount of ExpContext"));
+            }
         }
     }
 

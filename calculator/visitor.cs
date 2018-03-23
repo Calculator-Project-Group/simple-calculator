@@ -67,12 +67,26 @@ namespace calculator
         public override Calc_node VisitLog_exp([NotNull] CalcParser.Log_expContext context)
         {
             // 生成 log 节点
-            Binary_node node = new Binary_node
+            Binary_node node = new Binary_node();
+
+            node.op = Binary_node.Operator.LOG;
+            if (context.children[2] is CalcParser.ExpContext)
             {
-                op = Binary_node.Operator.LOG,
-                node1 = Visit(context.exp(0)),
-                node2 = Visit(context.exp(1))
-            };
+                node.node1 = Visit(context.children[2]);
+                if (context.children[4] is CalcParser.ExpContext)
+                    node.node2 = Visit(context.children[4]);
+                else node.node2 = null;
+            }
+            else
+            {
+                node.node1 = null;
+                if (context.exp(0) != null)
+                    node.node2 = Visit(context.exp(0));
+                else node.node2 = null;
+            }
+                //node.node1 = Visit(context.exp(0)),
+                //node.node2 = Visit(context.exp(1))
+           
             return node;
         }
 
@@ -91,7 +105,9 @@ namespace calculator
                     node.func = Unary_node.FuncID.Tan;
                     break;
             }
-            node.node1 = Visit(context.exp());
+            if (context.exp() != null)
+                node.node1 = Visit(context.exp());
+            else node.node1 = null;
             return node;
         }
 

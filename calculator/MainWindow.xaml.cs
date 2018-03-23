@@ -54,6 +54,9 @@ namespace calculator
 
         private void Calculate_Button_Click(object sender, RoutedEventArgs e)
         {
+            CalcTreeGenerator G = new CalcTreeGenerator();
+            Calc_node node = G.Generate(raw_input.Text);
+            result_box.Text = "1234";
         }
 
         private void Control_Button_Click(object sender, RoutedEventArgs e)
@@ -79,6 +82,9 @@ namespace calculator
                             + raw_input.Text.Substring(index + 1);
                         raw_input.SelectionStart = index;
                     }
+                    break;
+                case "control_AC":
+                    raw_input.Text = "";
                     break;
                 default:
                     break;

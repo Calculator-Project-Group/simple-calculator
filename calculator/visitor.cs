@@ -153,7 +153,7 @@ namespace calculator
 
     public class CalcTreeGenerator
     {
-        public Calc_node Generator(string text)
+        public Calc_node Generate(string text)
         {
             var stream = new AntlrInputStream(text);
             var lexer = new CalcLexer(stream);

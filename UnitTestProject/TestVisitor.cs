@@ -11,20 +11,11 @@ namespace UnitTestProject
         [TestMethod]
         public void TestVisitExp()
         {
-            Console.WriteLine("TestVisitExp start");
             string input = @"10 - 2 + 3*4.5";
 
-            var stream = new AntlrInputStream(input);
-            var lexer = new CalcLexer(stream);
-            var tokens = new CommonTokenStream(lexer);
-            var parser = new CalcParser(tokens);
-            var tree = parser.exp();
+            CalcTreeGenerator G = new CalcTreeGenerator();
+            Calc_node node = G.Generate(input);
 
-            var visitor = new CalcVisitor();
-            var result = visitor.Visit(tree);
-
-
-            Console.WriteLine("TestVisitExp end");
         }
     }
 }

@@ -28,6 +28,7 @@ trig_exp: TrigID LeftParen (exp|) RightParen;
 
 exp:
     exp Power exp // this alternative will be considered first, corresponding to priority.
+    | Minus exp
     |exp (Multiply|Divide) exp 
     | exp (Plus|Minus) exp
     | LeftParen exp RightParen

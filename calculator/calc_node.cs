@@ -121,7 +121,7 @@ namespace calculator
         {
             node1.Calculate();
             isint = false;
-            double src = node1.isint ? result : fresult;
+            double src = node1.isint ? node1.result : node1.fresult;
             switch (func)
             {
                 case FuncID.Sin:

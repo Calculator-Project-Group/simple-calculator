@@ -105,7 +105,7 @@ namespace calculator
 
         private void Calculate_Button_Click(object sender, RoutedEventArgs e)
         {
-
+             
             Calc_node node = G.Generate(raw_input.Text);
             node.Calculate();
             if (node.isint)

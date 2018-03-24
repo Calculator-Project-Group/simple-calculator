@@ -105,9 +105,12 @@ namespace calculator
 
         private void Calculate_Button_Click(object sender, RoutedEventArgs e)
         {
-            
+
             Calc_node node = G.Generate(raw_input.Text);
-            result_box.Text = "1234";
+            node.Calculate();
+            if (node.isint)
+                result_box.Text = node.result.ToString();
+            else result_box.Text = node.fresult.ToString();
         }
 
         private void Control_Button_Click(object sender, RoutedEventArgs e)

@@ -56,6 +56,8 @@ namespace calculator
         public Operator op;
         public override void Calculate()
         {
+            node1.Calculate();
+            node2.Calculate();
             isint = node1.isint && node2.isint && (op != Operator.EXPO) && (op != Operator.LOG)
             && ((op != Operator.DIVIDE) || (node1.result % node2.result == 0));
             if (isint)
@@ -117,6 +119,7 @@ namespace calculator
         public Calc_node node1;
         public override void Calculate()
         {
+            node1.Calculate();
             isint = false;
             double src = node1.isint ? result : fresult;
             switch (func)

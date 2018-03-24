@@ -147,7 +147,7 @@ namespace calculator
             {
                 // we separate brackets and inner text
                 MathText lparen = new MathText("(",fontsize);
-                Canvas inner_text = RenderElement((exp as Bracket_node).internal_node,fontsize);
+                AlignCanvas inner_text = RenderElement((exp as Bracket_node).internal_node,fontsize);
                 MathText rparen = new MathText(")",fontsize);
                 // arrange positions of these elements
                 board = ArrangeHorizontalGroup(lparen, inner_text, rparen);
@@ -171,6 +171,13 @@ namespace calculator
                     case Binary_node.Operator.DIVIDE:
                         operand1 = RenderElement((exp as Binary_node).node1, fontsize*shrinkRatio);
                         operand2 = RenderElement((exp as Binary_node).node2, fontsize * shrinkRatio);
+                        // strip the bracket if operand2 is a bracket node
+                        if (operand2.Children.Count==3 && operand2.Children[0] is MathText && operand2.Children[2] is MathText)
+                        {
+                            AlignCanvas inner_node = operand2.Children[1] as AlignCanvas;
+                            operand2.Children.Remove(inner_node);
+                            operand2 = inner_node;
+                        }
                         Rectangle fractline = new Rectangle();
                         // fractline's width should be the longer of two elements
                         fractline.Width = (operand1.Width > operand2.Width ? operand1.Width : operand2.Width)*1.1;

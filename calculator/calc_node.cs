@@ -79,14 +79,14 @@ namespace calculator
                     }
                     catch (OverflowException)
                     {
-                        node1.fresult = node1.result;
-                        node2.fresult = node2.result;
                         isint = false;
                     }
                 }
             }
             if (!isint)
             {
+                if (node1.isint) node1.fresult = node1.result;
+                if (node2.isint) node2.fresult = node2.result;
                 switch (op)
                 {
                     case Operator.ADD:
@@ -118,7 +118,7 @@ namespace calculator
         public override void Calculate()
         {
             isint = false;
-            double src = node1.isint ? result : fresult;
+            double src = node1.isint ? node1.result : node1.fresult;
             switch (func)
             {
                 case FuncID.Sin:
@@ -131,7 +131,6 @@ namespace calculator
             }
             calculated = true;
         }
-
     }
 }
 

@@ -88,7 +88,7 @@ namespace calculator
                 if (node1.isint) node1.fresult = node1.result;
                 if (node2.isint) node2.fresult = node2.result;
                 switch (op)
-                {
+                { 
                     case Operator.ADD:
                         fresult = node1.fresult + node2.fresult; break;
                     case Operator.MINUS:

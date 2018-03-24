@@ -57,7 +57,7 @@ namespace calculator
         public override void Calculate()
         {
             isint = node1.isint && node2.isint && (op != Operator.EXPO) && (op != Operator.LOG)
-            && ((op != Operator.MULTI) || (node1.result % node2.result == 0));
+            && ((op != Operator.DIVIDE) || (node1.result % node2.result == 0));
             if (isint)
             {
                 checked

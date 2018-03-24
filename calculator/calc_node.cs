@@ -56,6 +56,8 @@ namespace calculator
         public Operator op;
         public override void Calculate()
         {
+            node1.Calculate();
+            node2.Calculate();
             isint = node1.isint && node2.isint && (op != Operator.EXPO) && (op != Operator.LOG)
             && ((op != Operator.DIVIDE) || (node1.result % node2.result == 0));
             if (isint)
@@ -88,7 +90,7 @@ namespace calculator
                 if (node1.isint) node1.fresult = node1.result;
                 if (node2.isint) node2.fresult = node2.result;
                 switch (op)
-                {
+                { 
                     case Operator.ADD:
                         fresult = node1.fresult + node2.fresult; break;
                     case Operator.MINUS:
@@ -117,6 +119,7 @@ namespace calculator
         public Calc_node node1;
         public override void Calculate()
         {
+            node1.Calculate();
             isint = false;
             double src = node1.isint ? node1.result : node1.fresult;
             switch (func)
@@ -131,6 +134,7 @@ namespace calculator
             }
             calculated = true;
         }
+
     }
 }
 

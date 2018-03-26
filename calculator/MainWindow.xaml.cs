@@ -105,6 +105,7 @@ namespace calculator
 
         private void Calculate_Button_Click(object sender, RoutedEventArgs e)
         {
+            if ("" == raw_input.Text) return;
             Calc_node node = null;
             try
             {
@@ -117,8 +118,18 @@ namespace calculator
             }
             node.Calculate();
             if (node.isint)
+            {
                 result_box.Text = node.result.ToString();
-            else result_box.Text = node.fresult.ToString();
+            }
+            else if (Double.IsNaN(node.fresult))
+            {
+                result_box.Text = "算式中存在错误";
+                return;
+            }
+            else
+            {
+                result_box.Text = node.fresult.ToString();
+            }
         }
 
         private void Control_Button_Click(object sender, RoutedEventArgs e)

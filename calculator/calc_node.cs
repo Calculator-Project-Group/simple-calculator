@@ -40,8 +40,13 @@ namespace calculator
                     isint = false;
                     fresult = internal_node.fresult;
                 }
-                calculated = true;
             }
+            else
+            {
+                isint = false;
+                fresult = Double.NaN;
+            }
+            calculated = true;
         }
     }
 
@@ -60,6 +65,7 @@ namespace calculator
             {
                 isint = false;
                 fresult =Double.NaN;
+                calculated = true;
                 return;
             }
             node1.Calculate();
@@ -129,6 +135,7 @@ namespace calculator
             {
                 isint = false;
                 fresult = Double.NaN;
+                calculated = true;
                 return;
             }
             node1.Calculate();

@@ -110,13 +110,13 @@ namespace calculator
             try
             {
                 node = G.Generate(raw_input.Text);
+                node.Calculate();
             }
             catch (Exception)
             {
                 result_box.Text = "算式中存在错误";
                 return;
             }
-            node.Calculate();
             if (node.isint)
             {
                 result_box.Text = node.result.ToString();

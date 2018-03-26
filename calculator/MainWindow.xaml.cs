@@ -105,8 +105,16 @@ namespace calculator
 
         private void Calculate_Button_Click(object sender, RoutedEventArgs e)
         {
-             
-            Calc_node node = G.Generate(raw_input.Text);
+            Calc_node node = null;
+            try
+            {
+                node = G.Generate(raw_input.Text);
+            }
+            catch (Exception)
+            {
+                result_box.Text = "算式中存在错误";
+                return;
+            }
             node.Calculate();
             if (node.isint)
                 result_box.Text = node.result.ToString();

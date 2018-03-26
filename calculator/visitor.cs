@@ -124,7 +124,16 @@ namespace calculator
             else if(i == 2)
             {
                 // LeftParen RightParen 空括号节点
-                return new Bracket_node();
+                if (context.LeftParen() != null)
+                    return new Bracket_node();
+                else if (context.Minus() != null)
+                {
+                    Calc_node absolute_val = Visit(context.children[1]);
+                    absolute_val.fresult = -absolute_val.fresult;
+                    absolute_val.result = -absolute_val.result;
+                    return absolute_val;
+                }
+                else return null;
             }
             else if(i == 3)
             {

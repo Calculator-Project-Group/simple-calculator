@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -59,7 +59,7 @@ namespace calculator
             node1.Calculate();
             node2.Calculate();
             isint = node1.isint && node2.isint && (op != Operator.EXPO) && (op != Operator.LOG)
-            && ((op != Operator.DIVIDE) || (node1.result % node2.result == 0));
+            && ((op != Operator.DIVIDE) || (node2.result!=0&&node1.result % node2.result == 0));
             if (isint)
             {
                 checked

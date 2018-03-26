@@ -6,8 +6,7 @@ It's a WPF application written in `C#`.
 - Windows XP (.NET 4 required)
 - Windows 7+
 ## Download
-Click here to download the latest binary release. (The link will be released soon.)
-
+Click [here](https://github.com/Calculator-Project-Group/simple-calculator/releases/download/v1.0.0.0/calculator.zip) to download the latest binary release.
 Of course, alternatively, you can built the application by yoursef using Visual Studio. Don't forget to install the required NuGet packages first :).
 ## Usage
 ### Overview of UI

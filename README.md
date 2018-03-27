@@ -15,8 +15,14 @@ Of course, alternatively, you can built the application by yoursef using Visual 
 You can either input the linear expression to be calculated via keyboard, or using buttons shown above.
 > A tip about the autocomplete facility:
 >
-> The `(` button supports autocomplete by default. However, you can disable this using left click.
+> The `(` button supports autocomplete by default. However, you can disable this using right click.
 
 The format of expressions you should input strictly follows a definition specified by a grammar specification file. But you needn't worry much for that because our grammar takes accounts of the most common forms of linear expressions, and the expressions you would naturally think of will usually be properly accepted by our parser.
 
 Calculate the expression pressing "`=`" button.
+
+## Calculation Accuracy
+
+Simple Calculator is intended for daily use, and doesn't not handle high precision numbers. 
+
+It stores 64-bit float point numbers and integer numbers internally, and support accuracy of 15 and 18 decimal digits respectively.
